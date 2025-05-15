@@ -4,7 +4,7 @@ pandas
 scikit-learn
 prophet
 yfinance
+sqlalchemy
 python-jose
 passlib[bcrypt]
-sqlalchemy
 python-multipart
