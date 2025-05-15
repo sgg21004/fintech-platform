@@ -1,19 +1,18 @@
-from fastapi import FastAPI, Query, HTTPException, Depends, Form
+from fastapi import FastAPI, Form, Depends, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from jose import JWTError, jwt
-from passlib.context import CryptContext
+from pydantic import BaseModel
 import yfinance as yf
-import pandas as pd
-from sklearn.linear_model import LinearRegression
 from prophet import Prophet
-from datetime import datetime, timedelta
+import pandas as pd
+import datetime
+import os
 from sqlalchemy.orm import Session
-from database import SessionLocal, engine, User, SearchHistory
+from database import get_db, User, create_database, engine
 
 app = FastAPI()
 
-# CORS setup
+# CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
